@@ -1,0 +1,22 @@
+{
+  "buildCommand": "npx expo export --platform web",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "framework": null,
+  "rewrites": [
+    { "source": "/api/weather/current",    "destination": "/api/weather-current" },
+    { "source": "/api/weather/forecast",   "destination": "/api/weather-forecast" },
+    { "source": "/api/coordinator/note",   "destination": "/api/coordinator-note" },
+    { "source": "/(.*)",                   "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin",  "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, DELETE, OPTIONS" },
+        { "key": "Cache-Control",                "value": "no-store" }
+      ]
+    }
+  ]
+}

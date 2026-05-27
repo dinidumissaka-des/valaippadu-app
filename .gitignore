@@ -33,6 +33,12 @@ yarn-error.*
 # local env files
 .env*.local
 
+# server env (has no secrets but keep out of repo as a habit)
+server/.env
+
+# Vercel
+.vercel
+
 # typescript
 *.tsbuildinfo
 
