@@ -40,7 +40,7 @@ export default function RootLayout() {
         screenOptions={{
           headerStyle:      { backgroundColor: PALETTE.surface },
           headerTintColor:  PALETTE.textPrimary,
-          headerTitleStyle: { fontFamily: 'IBMPlexMono_700Bold', fontSize: 15, letterSpacing: 1 },
+          headerTitleStyle: { fontFamily: 'IBMPlexMono_700Bold', fontSize: 15 },
           contentStyle:     { backgroundColor: PALETTE.bg },
         }}
       >

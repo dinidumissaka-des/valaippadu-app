@@ -5,6 +5,7 @@
   "dependencies": {
     "@expo-google-fonts/ibm-plex-mono": "^0.4.1",
     "@expo-google-fonts/noto-sans-tamil": "^0.4.3",
+    "@expo/vector-icons": "^15.0.2",
     "@react-native-community/slider": "5.2.0",
     "axios": "^1.16.1",
     "expo": "~56.0.5",
@@ -34,14 +35,14 @@
     "typescript": "~6.0.3"
   },
   "scripts": {
-    "start":        "expo start",
-    "android":      "expo start --android",
-    "ios":          "expo start --ios",
-    "web":          "expo start --web",
-    "server":       "cd server && node index.js",
-    "server:dev":   "cd server && node --watch index.js",
-    "build:web":    "expo export --platform web",
-    "typecheck":    "tsc --noEmit"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "server": "cd server && node index.js",
+    "server:dev": "cd server && node --watch index.js",
+    "build:web": "expo export --platform web",
+    "typecheck": "tsc --noEmit"
   },
   "private": true
 }
