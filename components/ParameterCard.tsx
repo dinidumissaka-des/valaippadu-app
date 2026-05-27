@@ -33,7 +33,7 @@ export function ParameterCard({ paramKey, reading, onPress }: Props) {
       <Card className="w-28">
         <CardContent className="p-3 items-center">
           <Text className="text-2xl mb-2">{ICONS[paramKey] ?? '📊'}</Text>
-          <Text className={`font-bold text-lg ${zoneColors[reading.zone]}`} style={{ fontFamily: 'IBMPlexMono_700Bold' }}>
+          <Text className={`font-bold text-lg ${zoneColors[reading.zone]}`} style={{ fontFamily: 'Manrope_800ExtraBold' }}>
             {reading.value}
           </Text>
           <Text className="text-slate-400 text-xs">{reading.unit}</Text>

@@ -23,7 +23,7 @@ export function ForecastTile({ day, onPress }: Props) {
     >
       <Text className="text-slate-500 text-xs mb-2">{dayName}</Text>
       <View className="rounded-lg px-1.5 py-0.5 mb-2" style={{ backgroundColor: colors.background }}>
-        <Text style={{ color: colors.primary, fontFamily: 'IBMPlexMono_700Bold', fontSize: 18 }}>
+        <Text style={{ color: colors.primary, fontFamily: 'Manrope_800ExtraBold', fontSize: 18 }}>
           {day.css_score}
         </Text>
       </View>

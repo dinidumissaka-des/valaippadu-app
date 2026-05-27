@@ -20,7 +20,7 @@ export function SimulatorSlider({ paramKey, value, onChange }: Props) {
     <View className="mb-4">
       <View className="flex-row justify-between mb-1">
         <Text className="text-slate-700 font-semibold text-sm">{t(paramKey as StringKey)}</Text>
-        <Text className="text-slate-900 text-sm" style={{ fontFamily: 'IBMPlexMono_700Bold' }}>
+        <Text className="text-slate-900 text-sm" style={{ fontFamily: 'Manrope_700Bold' }}>
           {value.toFixed(1)} {thresh.unit}
         </Text>
       </View>

@@ -29,7 +29,7 @@ function ForecastRow({ day, isToday }: { day: ForecastDay; isToday: boolean }) {
           <Text className="text-slate-400 text-xs mt-0.5">{dateStr}</Text>
         </View>
         <View className="items-end">
-          <Text style={{ color: colors.primary, fontFamily: 'IBMPlexMono_700Bold', fontSize: 28 }}>
+          <Text style={{ color: colors.primary, fontFamily: 'Manrope_800ExtraBold', fontSize: 28 }}>
             {day.css_score}
           </Text>
           <Text className="text-xs font-semibold" style={{ color: colors.text }}>

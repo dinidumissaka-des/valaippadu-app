@@ -33,7 +33,7 @@ export function ParameterGaugeBar({ paramKey, value, source }: Props) {
       <View className="flex-row justify-between items-center mb-2">
         <Text className="text-slate-800 font-semibold text-sm">{t(paramKey as StringKey)}</Text>
         <View className="flex-row items-center gap-2">
-          <Text className="text-slate-900 font-bold text-sm" style={{ fontFamily: 'IBMPlexMono_700Bold' }}>
+          <Text className="text-slate-900 font-bold text-sm" style={{ fontFamily: 'Manrope_700Bold' }}>
             {value} {unit}
           </Text>
           <Badge variant={source === 'LIVE' ? 'live' : 'simulated'}>

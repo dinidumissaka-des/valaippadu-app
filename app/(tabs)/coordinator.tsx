@@ -68,7 +68,7 @@ export default function CoordinatorScreen() {
     <ScrollView className="flex-1 bg-slate-50">
       {/* Header */}
       <View className="bg-white border-b border-slate-100 px-4 pt-14 pb-3">
-        <Text className="text-slate-900 font-bold text-base" style={{ fontFamily: 'IBMPlexMono_700Bold' }}>
+        <Text className="text-slate-900 font-bold text-base" style={{ fontFamily: 'Manrope_800ExtraBold' }}>
           {t('coordinator_dashboard')}
         </Text>
       </View>

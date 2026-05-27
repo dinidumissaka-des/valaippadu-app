@@ -5,9 +5,12 @@ import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   useFonts,
-  IBMPlexMono_400Regular,
-  IBMPlexMono_700Bold,
-} from '@expo-google-fonts/ibm-plex-mono';
+  Manrope_400Regular,
+  Manrope_500Medium,
+  Manrope_600SemiBold,
+  Manrope_700Bold,
+  Manrope_800ExtraBold,
+} from '@expo-google-fonts/manrope';
 import {
   NotoSansTamil_400Regular,
   NotoSansTamil_700Bold,
@@ -22,8 +25,11 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    IBMPlexMono_400Regular,
-    IBMPlexMono_700Bold,
+    Manrope_400Regular,
+    Manrope_500Medium,
+    Manrope_600SemiBold,
+    Manrope_700Bold,
+    Manrope_800ExtraBold,
     NotoSansTamil_400Regular,
     NotoSansTamil_700Bold,
   });
@@ -40,7 +46,7 @@ export default function RootLayout() {
         screenOptions={{
           headerStyle:      { backgroundColor: '#ffffff' },
           headerTintColor:  '#0f172a',
-          headerTitleStyle: { fontFamily: 'IBMPlexMono_700Bold', fontSize: 15 },
+          headerTitleStyle: { fontFamily: 'Manrope_700Bold', fontSize: 15 },
           headerShadowVisible: true,
           contentStyle:     { backgroundColor: '#f8fafc' },
         }}

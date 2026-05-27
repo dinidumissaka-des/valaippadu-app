@@ -70,7 +70,7 @@ export function CSSGauge({ score, zone, size = 280, showLabels = true, lang = 'e
 
       {showLabels && (
         <View className="absolute items-center" pointerEvents="none">
-          <Text style={{ color: colors.primary, fontFamily: 'IBMPlexMono_700Bold', fontSize: 64, lineHeight: 70 }}>
+          <Text style={{ color: colors.primary, fontFamily: 'Manrope_800ExtraBold', fontSize: 64, lineHeight: 70 }}>
             {score}
           </Text>
           <Text style={{ color: colors.primary }} className="text-base font-bold tracking-widest mt-1">

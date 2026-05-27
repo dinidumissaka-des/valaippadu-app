@@ -41,7 +41,7 @@ export default function HomeScreen() {
       {/* Header */}
       <View className="flex-row justify-between items-center px-4 pt-14 pb-3 bg-white border-b border-slate-100">
         <View>
-          <Text className="text-slate-900 font-bold text-base" style={{ fontFamily: 'IBMPlexMono_700Bold' }}>
+          <Text className="text-slate-900 font-bold text-base" style={{ fontFamily: 'Manrope_800ExtraBold' }}>
             🌊 Valaippadu
           </Text>
           <Text className="text-slate-400 text-xs mt-0.5">Cultivation Suitability</Text>
