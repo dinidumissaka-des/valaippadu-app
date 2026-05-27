@@ -5,21 +5,29 @@ import { useLanguage } from '../hooks/useLanguage';
 export function LanguageToggle() {
   const { lang, setLang } = useLanguage();
   return (
-    <div className="flex rounded-lg border border-slate-200 overflow-hidden bg-slate-50">
-      <button
-        className={cn('px-3 py-1.5 text-xs font-semibold transition-colors',
-          lang === 'en' ? 'bg-white text-slate-900 border-r border-slate-200' : 'text-slate-400 hover:text-slate-600')}
-        onClick={() => setLang('en')}
-      >
-        EN
-      </button>
-      <button
-        className={cn('px-3 py-1.5 text-xs font-semibold transition-colors',
-          lang === 'ta' ? 'bg-white text-slate-900' : 'text-slate-400 hover:text-slate-600')}
-        onClick={() => setLang('ta')}
-      >
-        தமிழ்
-      </button>
+    <div style={{ display: 'flex', backgroundColor: '#F7F7F7', borderRadius: 9999, padding: 3, border: '1px solid #EEEEEE' }}>
+      {(['en', 'ta'] as const).map((l) => {
+        const active = lang === l;
+        return (
+          <button
+            key={l}
+            onClick={() => setLang(l)}
+            style={{
+              padding: '5px 14px',
+              borderRadius: 9999,
+              backgroundColor: active ? '#fff' : 'transparent',
+              boxShadow: active ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
+              fontFamily: l === 'ta' ? 'var(--font-noto-tamil)' : 'var(--font-manrope)',
+              fontSize: 12,
+              fontWeight: active ? 600 : 400,
+              color: active ? '#222222' : '#B0B0B0',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            {l === 'en' ? 'EN' : 'தமிழ்'}
+          </button>
+        );
+      })}
     </div>
   );
 }

@@ -4,22 +4,22 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-xl font-semibold text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 w-full',
+  'inline-flex items-center justify-center rounded-pill font-semibold text-sm transition-all focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 w-full',
   {
     variants: {
       variant: {
-        default:     'bg-slate-900 text-white hover:bg-slate-800',
-        destructive: 'bg-red-600 text-white hover:bg-red-700',
-        outline:     'border border-slate-200 text-slate-700 bg-white hover:bg-slate-50',
-        secondary:   'bg-slate-100 text-slate-900 hover:bg-slate-200',
-        ghost:       'text-slate-700 hover:bg-slate-100',
-        success:     'bg-green-600 text-white hover:bg-green-700',
-        warning:     'bg-amber-500 text-white hover:bg-amber-600',
+        default:     'bg-dark text-white hover:bg-medium active:scale-[0.98]',
+        destructive: 'bg-rausch text-white hover:opacity-90 active:scale-[0.98]',
+        outline:     'border border-divider text-dark bg-white hover:bg-bg active:scale-[0.98]',
+        secondary:   'bg-bg text-dark hover:bg-divider active:scale-[0.98]',
+        ghost:       'text-dark hover:bg-bg active:scale-[0.98]',
+        success:     'bg-go text-white hover:opacity-90 active:scale-[0.98]',
+        warning:     'bg-caution text-white hover:opacity-90 active:scale-[0.98]',
       },
       size: {
-        default: 'h-10 px-4',
-        sm:      'h-8 px-3 text-xs',
-        lg:      'h-12 px-6',
+        default: 'h-12 px-6 text-sm',
+        sm:      'h-9 px-4 text-xs',
+        lg:      'h-14 px-8 text-base',
       },
     },
     defaultVariants: { variant: 'default', size: 'default' },

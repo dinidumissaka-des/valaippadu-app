@@ -14,32 +14,38 @@ function ForecastRow({ day, isToday }: { day: ForecastDay; isToday: boolean }) {
 
   return (
     <div
-      className="bg-white rounded-xl border border-slate-200 p-4 mb-3 overflow-hidden relative"
-      style={isToday ? { borderColor: colors.border, borderWidth: 1.5 } : {}}
+      style={{
+        backgroundColor: '#fff',
+        borderRadius: 16,
+        padding: '16px 20px',
+        marginBottom: 12,
+        boxShadow: '0 1px 2px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04)',
+        borderLeft: isToday ? `4px solid ${colors.primary}` : undefined,
+        paddingLeft: isToday ? 16 : 20,
+      }}
     >
-      {isToday && (
-        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: colors.primary }} />
-      )}
-      <div className="flex justify-between items-start mb-3 pl-2">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
         <div>
-          <p style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700, fontSize: 15, color: '#0f172a', margin: 0 }}>
-            {DAY_NAMES[dateObj.getDay()]}
+          <p style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700, fontSize: 16, color: '#222222', margin: 0 }}>
+            {isToday ? 'Today' : DAY_NAMES[dateObj.getDay()]}
           </p>
-          <p style={{ fontSize: 11, color: '#94a3b8', margin: '2px 0 0' }}>
-            {dateObj.toLocaleDateString([], { month: 'short', day: 'numeric' })}
+          <p style={{ fontSize: 12, color: '#B0B0B0', margin: '3px 0 0' }}>
+            {dateObj.toLocaleDateString([], { weekday: isToday ? 'long' : undefined, month: 'short', day: 'numeric' })}
           </p>
         </div>
-        <div className="text-right">
-          <p style={{ color: colors.primary, fontFamily: 'var(--font-manrope)', fontWeight: 800, fontSize: 28, margin: 0, lineHeight: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ backgroundColor: colors.primary + '15', borderRadius: 9999, padding: '3px 10px' }}>
+            <span style={{ fontSize: 11, fontFamily: 'var(--font-manrope)', fontWeight: 700, color: colors.primary }}>
+              {t(zoneKey)}
+            </span>
+          </div>
+          <span style={{ color: colors.primary, fontFamily: 'var(--font-manrope)', fontWeight: 800, fontSize: 28, lineHeight: 1 }}>
             {day.css_score}
-          </p>
-          <p style={{ fontSize: 11, fontFamily: 'var(--font-manrope)', fontWeight: 600, color: colors.text, margin: '2px 0 0' }}>
-            {t(zoneKey)}
-          </p>
+          </span>
         </div>
       </div>
-      <div className="h-2 bg-slate-100 rounded-full overflow-hidden ml-2">
-        <div className="h-full rounded-full" style={{ width: `${day.css_score}%`, backgroundColor: colors.primary }} />
+      <div style={{ height: 6, backgroundColor: '#EEEEEE', borderRadius: 9999, overflow: 'hidden' }}>
+        <div style={{ width: `${day.css_score}%`, height: '100%', backgroundColor: colors.primary, borderRadius: 9999, transition: 'width 0.6s ease' }} />
       </div>
     </div>
   );
@@ -50,8 +56,8 @@ export default function ForecastPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-50">
-        <div className="w-8 h-8 border-2 border-green-600 border-t-transparent rounded-full animate-spin" />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', backgroundColor: '#F7F7F7' }}>
+        <div style={{ width: 32, height: 32, border: '2.5px solid #222222', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
       </div>
     );
   }
@@ -59,13 +65,13 @@ export default function ForecastPage() {
   const today = new Date().toISOString().split('T')[0];
 
   return (
-    <div className="flex flex-col bg-slate-50 min-h-screen">
-      <div className="px-4 bg-white border-b border-slate-100" style={{ paddingTop: 52, paddingBottom: 12 }}>
-        <p style={{ fontFamily: 'var(--font-manrope)', fontWeight: 800, fontSize: 15, color: '#0f172a', margin: 0 }}>
+    <div style={{ backgroundColor: '#F7F7F7', minHeight: '100vh' }}>
+      <div style={{ backgroundColor: '#fff', padding: '52px 20px 16px', borderBottom: '1px solid #EEEEEE', position: 'sticky', top: 0, zIndex: 40 }}>
+        <p style={{ fontFamily: 'var(--font-manrope)', fontWeight: 800, fontSize: 20, color: '#222222', margin: 0 }}>
           7-Day Forecast
         </p>
       </div>
-      <div className="p-4 pb-10">
+      <div style={{ padding: '16px 16px 24px' }}>
         {forecast.map((day) => (
           <ForecastRow key={day.date} day={day} isToday={day.date === today} />
         ))}

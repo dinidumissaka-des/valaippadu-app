@@ -5,8 +5,8 @@ import { BottomNav } from '../components/BottomNav';
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WeatherProvider>
-      <div className="relative min-h-screen max-w-lg mx-auto bg-slate-50">
-        <main className="pb-16">{children}</main>
+      <div style={{ minHeight: '100vh', maxWidth: '32rem', margin: '0 auto', backgroundColor: '#F7F7F7', position: 'relative' }}>
+        <main style={{ paddingBottom: 80 }}>{children}</main>
         <BottomNav />
       </div>
     </WeatherProvider>
