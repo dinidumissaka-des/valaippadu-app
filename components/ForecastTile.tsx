@@ -4,6 +4,7 @@ import { ZONE_COLORS } from '../constants/Colors';
 import { ForecastDay } from '../services/cssCalculator';
 
 const DAY_ABBR = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const TODAY    = new Date().toISOString().split('T')[0];
 
 interface Props {
   day:     ForecastDay;
@@ -11,23 +12,25 @@ interface Props {
 }
 
 export function ForecastTile({ day, onPress }: Props) {
-  const colors  = ZONE_COLORS[day.zone];
-  const dayName = DAY_ABBR[new Date(day.date + 'T00:00:00').getDay()];
+  const colors   = ZONE_COLORS[day.zone];
+  const isToday  = day.date === TODAY;
+  const dayName  = isToday ? 'Today' : DAY_ABBR[new Date(day.date + 'T00:00:00').getDay()];
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      activeOpacity={0.75}
-      className="mr-2 w-16 bg-white rounded-xl border border-slate-200 p-2.5 items-center"
-      style={{ borderColor: colors.border }}
+      activeOpacity={0.7}
+      className="mr-1.5 bg-white rounded-xl border p-2 items-center"
+      style={{ width: 44, borderColor: isToday ? colors.primary : '#e2e8f0' }}
     >
-      <Text className="text-slate-500 text-xs mb-2">{dayName}</Text>
-      <View className="rounded-lg px-1.5 py-0.5 mb-2" style={{ backgroundColor: colors.background }}>
-        <Text style={{ color: colors.primary, fontFamily: 'Manrope_800ExtraBold', fontSize: 18 }}>
-          {day.css_score}
-        </Text>
+      <Text className="text-center mb-1" style={{ fontSize: 9, color: '#94a3b8' }}>{dayName}</Text>
+      <Text style={{ color: colors.primary, fontFamily: 'Manrope_500Medium', fontSize: 13 }}>
+        {day.css_score}
+      </Text>
+      {/* Score bar */}
+      <View className="w-full mt-1.5 bg-slate-100 rounded-sm overflow-hidden" style={{ height: 3 }}>
+        <View style={{ width: `${day.css_score}%`, height: 3, backgroundColor: colors.primary, borderRadius: 2 }} />
       </View>
-      <View className="w-5 rounded-sm" style={{ height: Math.max(3, (day.css_score / 100) * 28), backgroundColor: colors.primary }} />
     </TouchableOpacity>
   );
 }

@@ -28,7 +28,7 @@ const initial: WeatherState = {
   loading:     true,
   refreshing:  false,
   error:       null,
-  lang:        'en',
+  lang:        'ta',
   lastUpdated: null,
 };
 

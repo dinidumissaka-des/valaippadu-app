@@ -1,19 +1,19 @@
 import React from 'react';
 import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
-import { useWeatherContext } from '../context/WeatherContext';
-import { useLanguage } from '../hooks/useLanguage';
-import { ZONE_COLORS } from '../constants/Colors';
-import { ForecastDay } from '../services/cssCalculator';
+import { useWeatherContext } from '../../context/WeatherContext';
+import { useLanguage } from '../../hooks/useLanguage';
+import { ZONE_COLORS } from '../../constants/Colors';
+import { ForecastDay } from '../../services/cssCalculator';
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function ForecastRow({ day, isToday }: { day: ForecastDay; isToday: boolean }) {
-  const { t }    = useLanguage();
-  const colors   = ZONE_COLORS[day.zone];
-  const dateObj  = new Date(day.date + 'T00:00:00');
-  const dayName  = DAY_NAMES[dateObj.getDay()];
-  const dateStr  = dateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
-  const zoneKey  = day.zone.toLowerCase() as 'go' | 'caution' | 'stop';
+  const { t }   = useLanguage();
+  const colors  = ZONE_COLORS[day.zone];
+  const dateObj = new Date(day.date + 'T00:00:00');
+  const dayName = DAY_NAMES[dateObj.getDay()];
+  const dateStr = dateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
+  const zoneKey = day.zone.toLowerCase() as 'go' | 'caution' | 'stop';
 
   return (
     <View
@@ -25,14 +25,14 @@ function ForecastRow({ day, isToday }: { day: ForecastDay; isToday: boolean }) {
       )}
       <View className="flex-row justify-between items-start mb-3 pl-2">
         <View>
-          <Text className="text-slate-900 font-bold text-base">{dayName}</Text>
-          <Text className="text-slate-400 text-xs mt-0.5">{dateStr}</Text>
+          <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 15, color: '#0f172a' }}>{dayName}</Text>
+          <Text style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{dateStr}</Text>
         </View>
         <View className="items-end">
           <Text style={{ color: colors.primary, fontFamily: 'Manrope_800ExtraBold', fontSize: 28 }}>
             {day.css_score}
           </Text>
-          <Text className="text-xs font-semibold" style={{ color: colors.text }}>
+          <Text style={{ fontSize: 11, fontFamily: 'Manrope_600SemiBold', color: colors.text }}>
             {t(zoneKey)}
           </Text>
         </View>

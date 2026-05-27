@@ -3,8 +3,7 @@ import { View, Text } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import Animated, { useAnimatedProps, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import { Zone, ZONE_COLORS } from '../constants/Colors';
-import { STRINGS } from '../constants/strings';
-import { Lang } from '../constants/strings';
+import { STRINGS, Lang } from '../constants/strings';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
@@ -22,17 +21,17 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
 }
 
 function describeArc(cx: number, cy: number, r: number, startAngle: number, endAngle: number) {
-  const start    = polarToCartesian(cx, cy, r, endAngle);
-  const end      = polarToCartesian(cx, cy, r, startAngle);
+  const end      = polarToCartesian(cx, cy, r, endAngle);
+  const start    = polarToCartesian(cx, cy, r, startAngle);
   const largeArc = endAngle - startAngle <= 180 ? '0' : '1';
-  return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} 0 ${end.x} ${end.y}`;
+  return `M ${end.x} ${end.y} A ${r} ${r} 0 ${largeArc} 0 ${start.x} ${start.y}`;
 }
 
-export function CSSGauge({ score, zone, size = 280, showLabels = true, lang = 'en' }: CSSGaugeProps) {
+export function CSSGauge({ score, zone, size = 148, showLabels = true, lang = 'ta' }: CSSGaugeProps) {
   const cx = size / 2;
   const cy = size / 2;
-  const r  = size / 2 - 20;
-  const sw = 18;
+  const r  = size / 2 - 14;
+  const sw = 12;
 
   const START_ANGLE = 135;
   const TOTAL_SWEEP = 270;
@@ -56,8 +55,8 @@ export function CSSGauge({ score, zone, size = 280, showLabels = true, lang = 'e
   const zoneKey = zone.toLowerCase() as 'go' | 'caution' | 'stop';
 
   return (
-    <View className="items-center justify-center" style={{ width: size, height: size }}>
-      <Svg width={size} height={size}>
+    <View style={{ width: size, height: size }} className="items-center justify-center">
+      <Svg width={size} height={size} style={{ position: 'absolute' }}>
         <Path d={trackPath} stroke="#e2e8f0" strokeWidth={sw} strokeLinecap="round" fill="none" />
         <AnimatedPath
           animatedProps={animatedProps}
@@ -69,18 +68,16 @@ export function CSSGauge({ score, zone, size = 280, showLabels = true, lang = 'e
       </Svg>
 
       {showLabels && (
-        <View className="absolute items-center" pointerEvents="none">
-          <Text style={{ color: colors.primary, fontFamily: 'Manrope_800ExtraBold', fontSize: 64, lineHeight: 70 }}>
+        <View className="items-center" pointerEvents="none">
+          <Text style={{ color: colors.primary, fontFamily: 'Manrope_500Medium', fontSize: 40, lineHeight: 44 }}>
             {score}
           </Text>
-          <Text style={{ color: colors.primary }} className="text-base font-bold tracking-widest mt-1">
+          <Text style={{ color: colors.primary, fontFamily: 'Manrope_600SemiBold', fontSize: 13 }}>
             {STRINGS[lang][zoneKey]}
           </Text>
-          {lang === 'en' && (
-            <Text style={{ color: colors.text }} className="text-sm mt-0.5">
-              {STRINGS.ta[zoneKey]}
-            </Text>
-          )}
+          <Text style={{ color: colors.primary, fontFamily: 'NotoSansTamil_400Regular', fontSize: 11 }}>
+            {STRINGS.ta[zoneKey]}
+          </Text>
         </View>
       )}
     </View>

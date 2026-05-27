@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, View, ActivityIndicator } from 'react-native';
-import { useWeatherContext } from '../context/WeatherContext';
-import { ParameterGaugeBar } from '../components/ParameterGaugeBar';
-import { Card, CardContent } from '../components/ui/card';
-import { ParamKey } from '../constants/thresholds';
+import { useWeatherContext } from '../../context/WeatherContext';
+import { ParameterGaugeBar } from '../../components/ParameterGaugeBar';
+import { Card, CardContent } from '../../components/ui/card';
+import { ParamKey } from '../../constants/thresholds';
 
 const PARAM_ORDER: ParamKey[] = ['salinity', 'temperature', 'rainfall', 'wave_height', 'turbidity'];
 

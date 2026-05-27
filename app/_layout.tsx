@@ -52,8 +52,6 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(tabs)"                options={{ headerShown: false }} />
-        <Stack.Screen name="forecast"              options={{ title: '7-Day Forecast' }} />
-        <Stack.Screen name="parameters"            options={{ title: "Today's Readings" }} />
         <Stack.Screen name="coordinator/simulator" options={{ title: 'CSS Simulator' }} />
       </Stack>
     </WeatherProvider>
