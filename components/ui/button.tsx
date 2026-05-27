@@ -1,68 +1,49 @@
-import React from 'react';
-import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+'use client';
+import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'flex-row items-center justify-center rounded-lg px-4 py-3 active:opacity-80',
+  'inline-flex items-center justify-center rounded-xl font-semibold text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 w-full',
   {
     variants: {
       variant: {
-        default:     'bg-slate-900',
-        destructive: 'bg-red-600',
-        outline:     'border border-slate-200 bg-white',
-        secondary:   'bg-slate-100',
-        ghost:       'bg-transparent',
-        success:     'bg-green-600',
-        warning:     'bg-amber-500',
+        default:     'bg-slate-900 text-white hover:bg-slate-800',
+        destructive: 'bg-red-600 text-white hover:bg-red-700',
+        outline:     'border border-slate-200 text-slate-700 bg-white hover:bg-slate-50',
+        secondary:   'bg-slate-100 text-slate-900 hover:bg-slate-200',
+        ghost:       'text-slate-700 hover:bg-slate-100',
+        success:     'bg-green-600 text-white hover:bg-green-700',
+        warning:     'bg-amber-500 text-white hover:bg-amber-600',
       },
       size: {
-        default: 'h-12',
-        sm:      'h-9 px-3',
-        lg:      'h-14 px-6',
-        icon:    'h-10 w-10 px-0',
+        default: 'h-10 px-4',
+        sm:      'h-8 px-3 text-xs',
+        lg:      'h-12 px-6',
       },
     },
     defaultVariants: { variant: 'default', size: 'default' },
   }
 );
 
-const textVariants = cva('font-semibold text-sm tracking-wide', {
-  variants: {
-    variant: {
-      default:     'text-white',
-      destructive: 'text-white',
-      outline:     'text-slate-900',
-      secondary:   'text-slate-900',
-      ghost:       'text-slate-700',
-      success:     'text-white',
-      warning:     'text-white',
-    },
-  },
-  defaultVariants: { variant: 'default' },
-});
-
-interface ButtonProps extends VariantProps<typeof buttonVariants> {
-  onPress?: () => void;
-  disabled?: boolean;
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   loading?: boolean;
-  className?: string;
-  textClassName?: string;
-  children: React.ReactNode;
 }
 
-export function Button({ variant, size, onPress, disabled, loading, className, textClassName, children }: ButtonProps) {
+export function Button({ className, variant, size, loading, disabled, children, ...props }: Props) {
   return (
-    <TouchableOpacity
-      className={cn(buttonVariants({ variant, size }), (disabled || loading) && 'opacity-40', className)}
-      onPress={onPress}
+    <button
+      className={cn(buttonVariants({ variant, size }), className)}
       disabled={disabled || loading}
-      activeOpacity={0.8}
+      {...props}
     >
-      {loading && <ActivityIndicator size="small" color="white" className="mr-2" />}
-      {typeof children === 'string'
-        ? <Text className={cn(textVariants({ variant }), textClassName)}>{children}</Text>
-        : children}
-    </TouchableOpacity>
+      {loading && (
+        <svg className="animate-spin mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+        </svg>
+      )}
+      {children}
+    </button>
   );
 }

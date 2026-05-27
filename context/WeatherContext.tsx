@@ -1,8 +1,8 @@
+'use client';
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import { WeatherData, ForecastDay } from '../services/cssCalculator';
 import { fetchCurrentWeather, fetchForecast } from '../services/api';
 import { Lang } from '../constants/strings';
-import * as SecureStore from 'expo-secure-store';
 
 interface WeatherState {
   current:     WeatherData | null;
@@ -56,10 +56,10 @@ function reducer(state: WeatherState, action: Action): WeatherState {
 }
 
 interface WeatherContextValue extends WeatherState {
-  refresh: () => Promise<void>;
-  setLang: (lang: Lang) => void;
+  refresh:   () => Promise<void>;
+  refetch:   () => Promise<void>;
+  setLang:   (lang: Lang) => void;
   clearNote: () => void;
-  refetch: () => Promise<void>;
 }
 
 const WeatherContext = createContext<WeatherContextValue | null>(null);
@@ -77,24 +77,21 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const refresh = useCallback(() => loadData('REFRESH_START'), [loadData]);
-  const refetch = useCallback(() => loadData('FETCH_START'),   [loadData]);
+  const refresh  = useCallback(() => loadData('REFRESH_START'), [loadData]);
+  const refetch  = useCallback(() => loadData('FETCH_START'),   [loadData]);
 
-  const setLang = useCallback(async (lang: Lang) => {
+  const setLang = useCallback((lang: Lang) => {
     dispatch({ type: 'SET_LANG', lang });
-    await SecureStore.setItemAsync('lang', lang);
+    if (typeof window !== 'undefined') localStorage.setItem('lang', lang);
   }, []);
 
   const clearNote = useCallback(() => dispatch({ type: 'CLEAR_NOTE' }), []);
 
-  // Load saved language on mount
   useEffect(() => {
-    SecureStore.getItemAsync('lang').then((saved) => {
-      if (saved === 'en' || saved === 'ta') dispatch({ type: 'SET_LANG', lang: saved });
-    });
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('lang') : null;
+    if (saved === 'en' || saved === 'ta') dispatch({ type: 'SET_LANG', lang: saved });
   }, []);
 
-  // Initial fetch + poll every 60 min
   useEffect(() => {
     loadData('FETCH_START');
     const interval = setInterval(() => loadData('FETCH_START'), 60 * 60 * 1000);
@@ -102,7 +99,7 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
   }, [loadData]);
 
   return (
-    <WeatherContext.Provider value={{ ...state, refresh, setLang, clearNote, refetch }}>
+    <WeatherContext.Provider value={{ ...state, refresh, refetch, setLang, clearNote }}>
       {children}
     </WeatherContext.Provider>
   );

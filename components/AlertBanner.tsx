@@ -1,21 +1,20 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+'use client';
+import { AlertTriangle } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 
 export function AlertBanner() {
   const { t } = useLanguage();
   return (
-    <View className="mx-4 bg-red-50 border border-red-200 rounded-xl px-3 py-2.5 flex-row items-center gap-2">
-      <Ionicons name="warning-outline" size={16} color="#dc2626" />
-      <View className="flex-1">
-        <Text style={{ fontSize: 12, fontFamily: 'Manrope_600SemiBold', color: '#dc2626' }}>
+    <div className="mx-4 bg-red-50 border border-red-200 rounded-xl px-3 py-2.5 flex items-center gap-2">
+      <AlertTriangle size={16} color="#dc2626" className="shrink-0" />
+      <div>
+        <p style={{ fontSize: 12, fontFamily: 'var(--font-manrope)', fontWeight: 600, color: '#dc2626', margin: 0 }}>
           {t('do_not_cultivate')}
-        </Text>
-        <Text style={{ fontSize: 10, fontFamily: 'NotoSansTamil_400Regular', color: '#dc2626', marginTop: 1 }}>
+        </p>
+        <p style={{ fontFamily: 'var(--font-noto-tamil)', fontSize: 10, color: '#dc2626', margin: '2px 0 0' }}>
           இன்று பயிரிட வேண்டாம்
-        </Text>
-      </View>
-    </View>
+        </p>
+      </div>
+    </div>
   );
 }

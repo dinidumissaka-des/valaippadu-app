@@ -1,40 +1,47 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import Slider from '@react-native-community/slider';
-import { StringKey } from '../constants/strings';
+'use client';
+import { THRESHOLDS, ParamKey } from '../constants/thresholds';
 import { useLanguage } from '../hooks/useLanguage';
-import { ParamKey, THRESHOLDS } from '../constants/thresholds';
-import { ParameterValues } from '../services/cssCalculator';
+import { StringKey } from '../constants/strings';
+
+const STEPS: Record<ParamKey, number> = {
+  salinity:    0.5,
+  temperature: 0.5,
+  rainfall:    1,
+  wave_height: 0.05,
+  turbidity:   0.5,
+};
 
 interface Props {
   paramKey: ParamKey;
   value:    number;
-  onChange: (v: number) => void;
+  onChange: (val: number) => void;
 }
 
 export function SimulatorSlider({ paramKey, value, onChange }: Props) {
   const { t }  = useLanguage();
   const thresh = THRESHOLDS[paramKey] as any;
+  const { min, max, unit } = thresh;
 
   return (
-    <View className="mb-4">
-      <View className="flex-row justify-between mb-1">
-        <Text className="text-slate-700 font-semibold text-sm">{t(paramKey as StringKey)}</Text>
-        <Text className="text-slate-900 text-sm" style={{ fontFamily: 'Manrope_700Bold' }}>
-          {value.toFixed(1)} {thresh.unit}
-        </Text>
-      </View>
-      <Slider
-        style={{ width: '100%', height: 32 }}
-        minimumValue={thresh.min}
-        maximumValue={thresh.max}
+    <div className="mb-5">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-slate-700 font-semibold text-sm">{t(paramKey as StringKey)}</span>
+        <span style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700, fontSize: 14, color: '#0f172a' }}>
+          {value} {unit}
+        </span>
+      </div>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={STEPS[paramKey]}
         value={value}
-        onValueChange={onChange}
-        minimumTrackTintColor="#0ea5e9"
-        maximumTrackTintColor="#e2e8f0"
-        thumbTintColor="#0f172a"
-        step={0.1}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
       />
-    </View>
+      <div className="flex justify-between mt-1">
+        <span className="text-slate-400 text-xs">{min} {unit}</span>
+        <span className="text-slate-400 text-xs">{max} {unit}</span>
+      </div>
+    </div>
   );
 }

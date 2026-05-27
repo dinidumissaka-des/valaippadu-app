@@ -1,6 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+'use client';
+import { MessageSquareMore } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 
 interface Props {
@@ -13,28 +12,28 @@ interface Props {
 export function CoordinatorNote({ text, postedAt, onClear, showClear = false }: Props) {
   const { t } = useLanguage();
   return (
-    <View className="mx-4 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5 flex-row gap-2">
-      <Ionicons name="chatbubble-ellipses-outline" size={15} color="#d97706" style={{ marginTop: 1 }} />
-      <View className="flex-1">
-        <View className="flex-row justify-between items-center mb-1">
-          <Text style={{ fontSize: 10, fontFamily: 'Manrope_600SemiBold', color: '#92400e', textTransform: 'uppercase', letterSpacing: 0.6 }}>
+    <div className="mx-4 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5 flex gap-2">
+      <MessageSquareMore size={15} color="#d97706" style={{ marginTop: 1, flexShrink: 0 }} />
+      <div className="flex-1 min-w-0">
+        <div className="flex justify-between items-center mb-1">
+          <span style={{ fontSize: 10, fontFamily: 'var(--font-manrope)', fontWeight: 600, color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
             {t('coordinator_message')}
-          </Text>
+          </span>
           {showClear && onClear && (
-            <TouchableOpacity onPress={onClear}>
-              <Text style={{ fontSize: 10, color: '#d97706', textDecorationLine: 'underline' }}>{t('clear_note')}</Text>
-            </TouchableOpacity>
+            <button onClick={onClear} className="ml-2 shrink-0">
+              <span style={{ fontSize: 10, color: '#d97706', textDecoration: 'underline' }}>{t('clear_note')}</span>
+            </button>
           )}
-        </View>
-        <Text style={{ fontSize: 12, color: '#92400e', lineHeight: 17, fontFamily: 'Manrope_400Regular' }}>
+        </div>
+        <p style={{ fontSize: 12, color: '#92400e', lineHeight: '17px', fontFamily: 'var(--font-manrope)', margin: 0 }}>
           {text}
-        </Text>
+        </p>
         {postedAt && (
-          <Text style={{ fontSize: 9, color: '#d97706', marginTop: 4 }}>
+          <span style={{ fontSize: 9, color: '#d97706', marginTop: 4, display: 'block' }}>
             {new Date(postedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-          </Text>
+          </span>
         )}
-      </View>
-    </View>
+      </div>
+    </div>
   );
 }

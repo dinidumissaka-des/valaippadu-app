@@ -1,27 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  presets: [require('nativewind/preset')],
+  content: [
+    './app/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+  ],
   theme: {
     extend: {
       fontFamily: {
-        sans:     ['Manrope_400Regular'],
-        medium:   ['Manrope_500Medium'],
-        semibold: ['Manrope_600SemiBold'],
-        bold:     ['Manrope_700Bold'],
-        extrabold:['Manrope_800ExtraBold'],
-        tamil:    ['NotoSansTamil_400Regular'],
+        manrope: ['var(--font-manrope)', 'sans-serif'],
+        tamil:   ['var(--font-noto-tamil)', 'sans-serif'],
       },
       colors: {
-        bg:           '#f8fafc',
-        surface:      '#ffffff',
-        border:       '#e2e8f0',
-        go:           '#16a34a',
-        'go-bg':      '#f0fdf4',
-        caution:      '#d97706',
-        'caution-bg': '#fffbeb',
-        stop:         '#dc2626',
-        'stop-bg':    '#fef2f2',
+        go:      { DEFAULT: '#16a34a', light: '#f0fdf4', border: '#bbf7d0' },
+        caution: { DEFAULT: '#d97706', light: '#fffbeb', border: '#fde68a' },
+        stop:    { DEFAULT: '#dc2626', light: '#fef2f2', border: '#fecaca' },
       },
     },
   },

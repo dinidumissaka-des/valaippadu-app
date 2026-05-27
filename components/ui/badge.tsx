@@ -1,54 +1,26 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const badgeVariants = cva(
-  'flex-row items-center rounded-full px-2.5 py-1',
+  'inline-flex items-center rounded-md px-1.5 py-0.5 text-xs font-medium',
   {
     variants: {
       variant: {
-        default:     'bg-slate-900',
-        secondary:   'bg-slate-100',
-        outline:     'border border-slate-200 bg-transparent',
-        destructive: 'bg-red-100',
-        success:     'bg-green-100',
-        warning:     'bg-amber-100',
-        live:        'bg-green-50 border border-green-200',
-        simulated:   'bg-slate-100 border border-slate-200',
+        default:     'bg-slate-100 text-slate-700',
+        live:        'bg-green-100 text-green-700',
+        simulated:   'bg-slate-100 text-slate-500',
+        success:     'bg-green-100 text-green-700',
+        warning:     'bg-amber-100 text-amber-700',
+        destructive: 'bg-red-100 text-red-700',
       },
     },
-    defaultVariants: { variant: 'secondary' },
+    defaultVariants: { variant: 'default' },
   }
 );
 
-const textVariants = cva('text-xs font-semibold', {
-  variants: {
-    variant: {
-      default:     'text-white',
-      secondary:   'text-slate-700',
-      outline:     'text-slate-700',
-      destructive: 'text-red-700',
-      success:     'text-green-700',
-      warning:     'text-amber-700',
-      live:        'text-green-700',
-      simulated:   'text-slate-500',
-    },
-  },
-  defaultVariants: { variant: 'secondary' },
-});
+interface Props extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {}
 
-interface BadgeProps extends VariantProps<typeof badgeVariants> {
-  className?: string;
-  children: React.ReactNode;
-}
-
-export function Badge({ variant, className, children }: BadgeProps) {
-  return (
-    <View className={cn(badgeVariants({ variant }), className)}>
-      {typeof children === 'string'
-        ? <Text className={textVariants({ variant })}>{children}</Text>
-        : children}
-    </View>
-  );
+export function Badge({ className, variant, ...props }: Props) {
+  return <span className={cn(badgeVariants({ variant }), className)} {...props} />;
 }

@@ -1,15 +1,6 @@
-import React from 'react';
-import { View } from 'react-native';
+import * as React from 'react';
 import { cn } from '../../lib/utils';
 
-export function Separator({ className, orientation = 'horizontal' }: { className?: string; orientation?: 'horizontal' | 'vertical' }) {
-  return (
-    <View
-      className={cn(
-        'bg-slate-200',
-        orientation === 'horizontal' ? 'h-px w-full' : 'w-px h-full',
-        className
-      )}
-    />
-  );
+export function Separator({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('h-px bg-slate-100', className)} {...props} />;
 }
