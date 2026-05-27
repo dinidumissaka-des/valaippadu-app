@@ -35,10 +35,10 @@ export function ParameterCard({ paramKey, reading, onPress }: Props) {
       onClick={onPress}
       className="mr-3 bg-white flex flex-col items-center transition-all active:scale-95"
       style={{
-        width: 76,
-        minWidth: 76,
+        width: 96,
+        minWidth: 96,
         borderRadius: 16,
-        padding: '12px 8px',
+        padding: '12px 10px',
         boxShadow: '0 1px 2px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04)',
       }}
     >

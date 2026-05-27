@@ -1,5 +1,5 @@
 'use client';
-import { Fish, CloudOff, RefreshCw } from 'lucide-react';
+import { CloudSun, CloudOff, RefreshCw } from 'lucide-react';
 import { useWeatherContext } from '../context/WeatherContext';
 import { useLanguage } from '../hooks/useLanguage';
 import { ZONE_COLORS } from '../constants/Colors';
@@ -117,7 +117,7 @@ export default function HomePage() {
             backgroundColor: colors.primary,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <Fish size={20} color="#fff" strokeWidth={1.8} />
+            <CloudSun size={20} color="#fff" strokeWidth={1.8} />
           </div>
           <div>
             <p style={{ fontFamily: 'var(--font-manrope)', fontWeight: 800, fontSize: 16, color: '#222222', margin: 0, lineHeight: '20px' }}>

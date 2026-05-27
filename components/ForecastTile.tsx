@@ -20,10 +20,10 @@ export function ForecastTile({ day, onPress }: Props) {
       onClick={onPress}
       className="mr-2.5 flex flex-col items-center transition-all active:scale-95"
       style={{
-        width: 52,
-        minWidth: 52,
+        width: 68,
+        minWidth: 68,
         borderRadius: 16,
-        padding: '10px 6px',
+        padding: '10px 8px',
         backgroundColor: isToday ? colors.primary : '#FFFFFF',
         boxShadow: '0 1px 2px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04)',
       }}
