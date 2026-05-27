@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import Slider from '@react-native-community/slider';
-import { PALETTE } from '../constants/Colors';
-import { useLanguage } from '../hooks/useLanguage';
 import { StringKey } from '../constants/strings';
+import { useLanguage } from '../hooks/useLanguage';
 import { ParamKey, THRESHOLDS } from '../constants/thresholds';
+import { ParameterValues } from '../services/cssCalculator';
 
 interface Props {
   paramKey: ParamKey;
@@ -13,34 +13,28 @@ interface Props {
 }
 
 export function SimulatorSlider({ paramKey, value, onChange }: Props) {
-  const { t } = useLanguage();
+  const { t }  = useLanguage();
   const thresh = THRESHOLDS[paramKey] as any;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <Text style={styles.label}>{t(paramKey as StringKey)}</Text>
-        <Text style={styles.value}>{value.toFixed(1)} {thresh.unit}</Text>
+    <View className="mb-4">
+      <View className="flex-row justify-between mb-1">
+        <Text className="text-slate-700 font-semibold text-sm">{t(paramKey as StringKey)}</Text>
+        <Text className="text-slate-900 text-sm" style={{ fontFamily: 'IBMPlexMono_700Bold' }}>
+          {value.toFixed(1)} {thresh.unit}
+        </Text>
       </View>
       <Slider
-        style={styles.slider}
+        style={{ width: '100%', height: 32 }}
         minimumValue={thresh.min}
         maximumValue={thresh.max}
         value={value}
         onValueChange={onChange}
-        minimumTrackTintColor='#f59e0b'
-        maximumTrackTintColor={PALETTE.border}
-        thumbTintColor='#f1f5f9'
+        minimumTrackTintColor="#0ea5e9"
+        maximumTrackTintColor="#e2e8f0"
+        thumbTintColor="#0f172a"
         step={0.1}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { marginBottom: 16 },
-  row:       { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 },
-  label:     { color: PALETTE.textPrimary, fontSize: 13, fontWeight: '600' },
-  value:     { color: PALETTE.textSecondary, fontFamily: 'IBMPlexMono_700Bold', fontSize: 13 },
-  slider:    { width: '100%', height: 32 },
-});

@@ -1,3 +1,4 @@
+import '../global.css';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -12,7 +13,6 @@ import {
   NotoSansTamil_700Bold,
 } from '@expo-google-fonts/noto-sans-tamil';
 import { WeatherProvider } from '../context/WeatherContext';
-import { PALETTE } from '../constants/Colors';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -35,18 +35,19 @@ export default function RootLayout() {
 
   return (
     <WeatherProvider>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <Stack
         screenOptions={{
-          headerStyle:      { backgroundColor: PALETTE.surface },
-          headerTintColor:  PALETTE.textPrimary,
+          headerStyle:      { backgroundColor: '#ffffff' },
+          headerTintColor:  '#0f172a',
           headerTitleStyle: { fontFamily: 'IBMPlexMono_700Bold', fontSize: 15 },
-          contentStyle:     { backgroundColor: PALETTE.bg },
+          headerShadowVisible: true,
+          contentStyle:     { backgroundColor: '#f8fafc' },
         }}
       >
-        <Stack.Screen name="(tabs)"      options={{ headerShown: false }} />
-        <Stack.Screen name="forecast"    options={{ title: '7-Day Forecast' }} />
-        <Stack.Screen name="parameters"  options={{ title: "Today's Readings" }} />
+        <Stack.Screen name="(tabs)"                options={{ headerShown: false }} />
+        <Stack.Screen name="forecast"              options={{ title: '7-Day Forecast' }} />
+        <Stack.Screen name="parameters"            options={{ title: "Today's Readings" }} />
         <Stack.Screen name="coordinator/simulator" options={{ title: 'CSS Simulator' }} />
       </Stack>
     </WeatherProvider>

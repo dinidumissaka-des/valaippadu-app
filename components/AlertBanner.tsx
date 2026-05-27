@@ -1,24 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { useLanguage } from '../hooks/useLanguage';
 
 export function AlertBanner() {
   const { t } = useLanguage();
   return (
-    <View style={styles.banner}>
-      <Text style={styles.text}>⚠️  {t('do_not_cultivate')}</Text>
+    <View className="mx-4 mb-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex-row items-center gap-2">
+      <Text className="text-base">⛔</Text>
+      <Text className="text-red-700 font-bold text-sm flex-1">{t('do_not_cultivate')}</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  banner: {
-    backgroundColor: '#450a0a',
-    borderLeftWidth: 4,
-    borderLeftColor: '#ef4444',
-    paddingHorizontal: 16,
-    paddingVertical:   12,
-    marginBottom:      12,
-  },
-  text: { color: '#fca5a5', fontWeight: '700', fontSize: 14, letterSpacing: 0.5 },
-});

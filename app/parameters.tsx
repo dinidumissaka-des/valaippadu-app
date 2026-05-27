@@ -1,8 +1,8 @@
 import React from 'react';
-import { ScrollView, View, ActivityIndicator, StyleSheet } from 'react-native';
+import { ScrollView, View, ActivityIndicator } from 'react-native';
 import { useWeatherContext } from '../context/WeatherContext';
-import { PALETTE } from '../constants/Colors';
 import { ParameterGaugeBar } from '../components/ParameterGaugeBar';
+import { Card, CardContent } from '../components/ui/card';
 import { ParamKey } from '../constants/thresholds';
 
 const PARAM_ORDER: ParamKey[] = ['salinity', 'temperature', 'rainfall', 'wave_height', 'turbidity'];
@@ -12,31 +12,29 @@ export default function ParametersScreen() {
 
   if (loading || !current) {
     return (
-      <View style={styles.center}>
-        <ActivityIndicator color={PALETTE.live} size="large" />
+      <View className="flex-1 items-center justify-center bg-slate-50">
+        <ActivityIndicator color="#16a34a" size="large" />
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
-      {PARAM_ORDER.map((key) => {
-        const reading = current.parameters[key];
-        return (
-          <ParameterGaugeBar
-            key={key}
-            paramKey={key}
-            value={reading.value}
-            source={reading.source}
-          />
-        );
-      })}
+    <ScrollView className="flex-1 bg-slate-50" contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
+      <Card>
+        <CardContent className="pt-4">
+          {PARAM_ORDER.map((key) => {
+            const reading = current.parameters[key];
+            return (
+              <ParameterGaugeBar
+                key={key}
+                paramKey={key}
+                value={reading.value}
+                source={reading.source}
+              />
+            );
+          })}
+        </CardContent>
+      </Card>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  scroll:  { flex: 1, backgroundColor: PALETTE.bg },
-  content: { padding: 20, paddingBottom: 40 },
-  center:  { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: PALETTE.bg },
-});
